@@ -1,16 +1,13 @@
-import base.BaseTest;
+package pages;
+
+import base.BaseStepMethod;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
-import pages.AllPages;
-import pages.MainPage;
 import utilities.ConfigReader;
-/*
-Some of the HTTP status codes are :
-200 – valid Link
-404 – Link Not Found
-400 – Bad Request
-401 – Unauthorized
-500 – Internal error
- */
+
 
 //1. Kullanıcı girişi yapılarak sepete ürün eklenmesi
 // Kullanıcı Hepsiburada.com sitesini ziyaret eder.
@@ -20,26 +17,25 @@ Some of the HTTP status codes are :
 // Kullanıcı, Arama sonucunda ekrana gelen ürün listesinden (veya tek bir sonuç da dönmüş olabilir) ürün seçer.
 // Seçilen ürün için 2 tane farklı satıcıdan ürün seçilip sepete eklenir.
 // Seçilen ürünün doğru olarak eklendiği 'Sepetim' sayfasında doğrulanmalıdır.
-
-//2. Kullanıcı girişi yapılmadan belirtilen ürünü sepete ekleme
+// 2. Kullanıcı girişi yapılmadan belirtilen ürünü sepete ekleme
 // Kullanıcı Hepsiburada.com sitesini ziyaret eder.
 //  Kullanıcı, Arama sonucunda ekrana gelen ürün listesinden (veya tek bir sonuç da dönmüş olabilir) ürün seçer.
 // Seçilen ürün için 2 tane farklı satıcıdan ürün seçilip sepete eklenir.
 // Seçilen ürünün doğru olarak eklendiği 'Sepetim' sayfasında doğrulanmalıdır.
+public class UserDashboardPage extends BaseStepMethod {
+    private static final Logger LOGGER= LogManager.getLogger(UserDashboardPage.class);
 
-public class TC001 extends BaseTest {
-    AllPages allPages=new AllPages();
-    @Test
-    public void test01() throws InterruptedException {
-        allPages.mainPage().go_To_Url(ConfigReader.getProperty("baseURL"));
-        allPages.mainPage().hoverOverGirisYapButon();
-        Thread.sleep(2000);
-        allPages.loginPage().loginHepsiBurada(ConfigReader.getProperty("UserMail"),ConfigReader.getProperty("UserPassword"));
-        allPages.userDashboardPage().verifyValidLogin("Sumeyye");
-        allPages.userDashboardPage().searchProduct("robot supurge");
+    private static final By TXTUSERDPAGEUSERNAME =By.xpath("((//a[@title='Hesabım'])//span)[2]");
+    private static final By INPUTUSERDPAGESEARCHBOX =By.xpath("(//input[@type='text'])[1]");
+
+    public void verifyValidLogin(String userName){
+        //getTextElement(TXTUSERDPAGEUSERNAME);
+        ContainsText(TXTUSERDPAGEUSERNAME,userName);
+        LOGGER.info("User text is verified. "+userName);
     }
 
+    public void searchProduct(String product){
+        setTextElement(INPUTUSERDPAGESEARCHBOX,product+ Keys.ENTER);
+
     }
-
-
-
+}

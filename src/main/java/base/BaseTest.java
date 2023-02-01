@@ -45,8 +45,8 @@ public class BaseTest {
                     options.addArguments("--ignore-certificate-errors");//Bazi sayfalar sertika istiyor.Sertifika gibi seyleri ignore ediyor
                     options.addArguments("--allow-insecure-localhost");
                     options.addArguments("--acceptInsecureCerts");
-//                    options.addArguments("--disable-blink-features=AutomationControlled");
-//                    options.addArguments("--disable-extensions");
+                     options.addArguments("--disable-blink-features=AutomationControlled");
+                     options.addArguments("--disable-extensions");
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver(options);
                     break;

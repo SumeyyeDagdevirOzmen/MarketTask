@@ -2,20 +2,31 @@ package pages;
 
 public class AllPages {
 
-    private MainPage mainPage;
-    private HomePage homePage;
+    public AllPages() {
+    }
 
-    public MainPage mainPage(){
-        if (mainPage==null){
-            mainPage=new MainPage();
+    private MainPage mainPage;
+    private LoginPage loginPage;
+    private UserDashboardPage userDashboardPage;
+
+    public MainPage mainPage() {
+        if (mainPage == null) {
+            mainPage = new MainPage();
         }
         return mainPage;
     }
 
-    public HomePage homePage(){
-        if (homePage==null){
-            homePage=new HomePage();
+    public LoginPage loginPage() {
+        if (loginPage == null) {
+            loginPage = new LoginPage();
         }
-        return homePage;
+        return loginPage;
+    }
+
+    public UserDashboardPage userDashboardPage() {
+        if (userDashboardPage == null) {
+            userDashboardPage = new UserDashboardPage();
+        }
+        return userDashboardPage;
     }
 }
